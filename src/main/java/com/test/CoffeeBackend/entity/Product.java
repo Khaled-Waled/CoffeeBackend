@@ -1,16 +1,13 @@
 package com.test.CoffeeBackend.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
 public class Product
 {
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "image")
@@ -21,6 +18,17 @@ public class Product
 
     @Column(name = "price")
     private float price;
+
+    public Product()
+    {
+    }
+
+    public Product(String image, String name, float price)
+    {
+        this.image = image;
+        this.name = name;
+        this.price = price;
+    }
 
     public Long getId()
     {

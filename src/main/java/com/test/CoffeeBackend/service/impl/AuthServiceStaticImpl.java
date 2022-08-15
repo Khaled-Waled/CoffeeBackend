@@ -20,7 +20,7 @@ public class AuthServiceStaticImpl implements IAuthService
     {
         try
         {
-            AppUser userEntity = new AppUser(request.getEmail(), request.getPassword());
+            AppUser userEntity = new AppUser(request.getEmail(), request.getPassword(), request.getFullName());
             userRepository.save(userEntity);
             return ResponseEntity.ok().body("Saved");
         }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class AppUser
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "email", nullable = false, unique = true)
@@ -23,10 +23,11 @@ public class AppUser
     {
     }
 
-    public AppUser(String email, String password)
+    public AppUser(String email, String password, String fullName)
     {
         this.email = email;
         this.password = password;
+        this.fullName = fullName;
     }
 
     public Integer getId()
