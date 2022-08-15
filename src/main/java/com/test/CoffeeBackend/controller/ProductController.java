@@ -4,25 +4,29 @@ import com.test.CoffeeBackend.dto.AuthRequestDTO;
 import com.test.CoffeeBackend.dto.ProductDTO;
 import com.test.CoffeeBackend.entity.Product;
 import com.test.CoffeeBackend.repository.ProductRepository;
+import com.test.CoffeeBackend.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
 public class ProductController
 {
     @Autowired
-    ProductRepository productRepository;
+    IProductService productService;
 
     @PostMapping("/add")
     public ResponseEntity<?> addNewProduct(@RequestBody ProductDTO productDTO)
     {
-        Product productEntity = new Product(productDTO.getImage(), productDTO.getName(),productDTO.getPrice());
-        productRepository.save(productEntity);
-        return null;
+        return productService.createProduct(productDTO);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllProducts()
+    {
+        return ResponseEntity.ok().body(productService.getAll());
     }
 }
