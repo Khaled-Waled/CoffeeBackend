@@ -24,6 +24,7 @@ public class AuthController
 
     /**
      * Create user and register them in the system, allows the credentials to be used to log in later
+     *
      * @param request
      * @return ResponseEntity: containing the state of execution
      */
@@ -35,6 +36,7 @@ public class AuthController
 
     /**
      * Login function that allows an existing user to log in to the system and receive a token
+     *
      * @param request
      * @return ResponseEntity: representing the state of the request and contains the JWT token if successful
      */

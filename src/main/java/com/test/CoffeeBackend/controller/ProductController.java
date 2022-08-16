@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 
 /**
- * @author khaled-waled
  * A Rest controller that provides Create product, get a product, and get all products APIs
+ *
+ * @author khaled-waled
  */
 @RestController
 @RequestMapping("/api/products")

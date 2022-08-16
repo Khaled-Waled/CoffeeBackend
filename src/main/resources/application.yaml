@@ -3,17 +3,20 @@ spring:
     name: CoffeeBackend
 
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/CafeDB
-    username: root
-    password: root
-  # JPA properties
+    driverClassName: org.postgresql.Driver
+    datasource.maxActive: 10
+    datasource.maxIdle: 5
+    datasource.minIdle: 2
+    datasource.initialSize: 5
+    datasource.removeAbandoned: true
+
+    datasource.url :  postgres://koscvwquljudfr:f6fea28f794b7e085adfd881e1cf4f9081126714fd0ff022ded8e8d7b346f6e4@ec2-34-234-240-121.compute-1.amazonaws.com:5432/dbq62nv3e307rg
   jpa:
     hibernate:
       ddl-auto: update # When you launch the application for the first time - switch "none" at "create"
     show-sql: true
     database: mysql
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
 app:
   jwt:
