@@ -1,0 +1,78 @@
+package com.test.CoffeeBackend.service.impl;
+
+import com.test.CoffeeBackend.Security.JwtUtils;
+import com.test.CoffeeBackend.dto.AuthRequestDTO;
+import com.test.CoffeeBackend.dto.AuthResponseDTO;
+import com.test.CoffeeBackend.dto.CustomUser;
+import com.test.CoffeeBackend.entity.AppUser;
+import com.test.CoffeeBackend.repository.UserRepository;
+import com.test.CoffeeBackend.service.IAuthService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+
+@Service
+@Primary
+public class AuthServiceImpl implements IAuthService, UserDetailsService
+{
+    @Autowired
+    AuthenticationManager authenticationManager;
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder encoder;
+    @Autowired
+    JwtUtils jwtUtils;
+    @Override
+    public ResponseEntity<?> createNewUser(AuthRequestDTO request)
+    {
+        if (userRepository.existsByEmail(request.getEmail())) {
+            return ResponseEntity.badRequest().body("Error: Email is already in use!");
+        }
+
+        // Create new user's account
+        AppUser user = new AppUser(request.getEmail(),
+                encoder.encode(request.getPassword()), request.getFullName());
+        userRepository.save(user);
+        return ResponseEntity.ok("User registered successfully!");
+    }
+
+    @Override
+    public ResponseEntity<?> login(AuthRequestDTO request)
+    {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+
+        CustomUser userDetails = (CustomUser) authentication.getPrincipal();
+        return ResponseEntity.ok(new AuthResponseDTO(userDetails.getUsername(), jwt));
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException
+    {
+        AppUser appUser = userRepository.findByEmail(email);
+
+        if (appUser == null)
+            throw new UsernameNotFoundException("Email " + email + " Not found");
+
+        return new CustomUser(appUser.getEmail(),
+                appUser.getPassword(),true, true, true,true,
+                new ArrayList<>(), appUser.getFullName());
+    }
+}

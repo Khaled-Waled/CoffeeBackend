@@ -18,4 +18,5 @@ spring:
 app:
   jwt:
     secret: secretJWT
+    ExpirationMs: 86400000
 server.port: 8090
