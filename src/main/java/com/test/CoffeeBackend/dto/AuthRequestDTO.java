@@ -2,20 +2,18 @@ package com.test.CoffeeBackend.dto;
 
 public class AuthRequestDTO
 {
+    private String fullName;
+    private String password;
     private String email;
 
-    private String password;
-
-    private String fullName;
-
-    public String getEmail()
+    public String getFullName()
     {
-        return email;
+        return fullName;
     }
 
-    public void setEmail(String email)
+    public void setFullName(String fullName)
     {
-        this.email = email;
+        this.fullName = fullName;
     }
 
     public String getPassword()
@@ -28,13 +26,13 @@ public class AuthRequestDTO
         this.password = password;
     }
 
-    public String getFullName()
+    public String getEmail()
     {
-        return fullName;
+        return email;
     }
 
-    public void setFullName(String fullName)
+    public void setEmail(String email)
     {
-        this.fullName = fullName;
+        this.email = email;
     }
 }
