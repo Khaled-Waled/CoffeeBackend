@@ -3,8 +3,7 @@ spring:
     name: CoffeeBackend
 
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/CafeDB
+    url: jdbc:postgresql://localhost:5432/Bank
     username: root
     password: root
   # JPA properties
@@ -12,8 +11,6 @@ spring:
     hibernate:
       ddl-auto: update # When you launch the application for the first time - switch "none" at "create"
     show-sql: true
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     generate-ddl: true
 app:
   jwt:
