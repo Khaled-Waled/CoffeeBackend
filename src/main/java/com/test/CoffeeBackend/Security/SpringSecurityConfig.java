@@ -31,9 +31,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private PasswordEncoder bcryptPasswordEncoder;
 
     private static final String[] AUTH_WHITELIST = {
-            // -- Swagger UI v3 (OpenAPI)
             "/v3/api-docs/**", "/swagger-ui/**", "/api/authentication/**",
-            // other public endpoints of your API may be appended to this array
     };
 
     @Bean

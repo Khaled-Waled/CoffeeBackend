@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author khaled-waled
+ * A Rest controller that provides login and signup APIs
+ */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/authentication")
@@ -18,12 +22,22 @@ public class AuthController
     @Autowired
     IAuthService authService;
 
+    /**
+     * Create user and register them in the system, allows the credentials to be used to log in later
+     * @param request
+     * @return ResponseEntity: containing the state of execution
+     */
     @PostMapping("/create")
     public ResponseEntity<?> createNewUser(@RequestBody AuthRequestDTO request)
     {
         return authService.createNewUser(request);
     }
 
+    /**
+     * Login function that allows an existing user to log in to the system and receive a token
+     * @param request
+     * @return ResponseEntity: representing the state of the request and contains the JWT token if successful
+     */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequestDTO request)
     {

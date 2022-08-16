@@ -4,6 +4,7 @@ import com.test.CoffeeBackend.dto.ProductDTO;
 import com.test.CoffeeBackend.entity.Product;
 import com.test.CoffeeBackend.repository.ProductRepository;
 import com.test.CoffeeBackend.service.IProductService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author khaled-waled
@@ -23,6 +25,8 @@ public class ProductServiceImpl implements IProductService
 {
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    ModelMapper modelMapper;
     @Override
     public ResponseEntity<?> createProduct(ProductDTO productDTO)
     {
@@ -38,8 +42,13 @@ public class ProductServiceImpl implements IProductService
     @Override
     public ResponseEntity<?> getProduct(Long id)
     {
-        //TODO
-        return null;
+        Optional<Product> product = productRepository.findById(id);
+        if(product.isPresent())
+        {
+            ProductDTO productDTO = modelMapper.map(product, ProductDTO.class);
+            return ResponseEntity.ok(productDTO);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @Override
