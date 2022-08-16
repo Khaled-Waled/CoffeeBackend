@@ -6,7 +6,9 @@ public class ProductDTO
     private String name;
     private float price;
 
-    public ProductDTO(String image, String name, float price)
+    private String description;
+
+    public ProductDTO(String image, String name, float price, String description)
     {
         this.image = image;
         this.name = name;
@@ -43,5 +45,15 @@ public class ProductDTO
     public void setPrice(float price)
     {
         this.price = price;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 }

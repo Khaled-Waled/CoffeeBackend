@@ -31,7 +31,7 @@ public class ProductServiceImpl implements IProductService
     public ResponseEntity<?> createProduct(ProductDTO productDTO)
     {
        Product productEntity =
-               new Product(productDTO.getImage(), productDTO.getName(),productDTO.getPrice());
+               new Product(productDTO.getImage(), productDTO.getName(),productDTO.getPrice(), productDTO.getDescription());
        productRepository.save(productEntity);
        URI uri =
                URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().
@@ -58,7 +58,7 @@ public class ProductServiceImpl implements IProductService
         ArrayList<ProductDTO> productDTOS = new ArrayList<>();
 
         products.forEach(product ->
-                productDTOS.add(new ProductDTO(product.getImage(),product.getName(),product.getPrice())));
+                productDTOS.add(new ProductDTO(product.getImage(),product.getName(),product.getPrice(),product.getDescription())));
         return productDTOS;
     }
 }
