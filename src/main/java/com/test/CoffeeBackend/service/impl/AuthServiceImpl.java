@@ -27,15 +27,12 @@ import java.util.ArrayList;
 @Primary
 public class AuthServiceImpl implements IAuthService, UserDetailsService
 {
-    @Autowired
-    AuthenticationManager authenticationManager;
+
     @Autowired
     UserRepository userRepository;
 
     @Autowired
     PasswordEncoder encoder;
-    @Autowired
-    JwtUtils jwtUtils;
     @Override
     public ResponseEntity<?> createNewUser(AuthRequestDTO request)
     {
@@ -53,14 +50,7 @@ public class AuthServiceImpl implements IAuthService, UserDetailsService
     @Override
     public ResponseEntity<?> login(AuthRequestDTO request)
     {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-
-        CustomUser userDetails = (CustomUser) authentication.getPrincipal();
-        return ResponseEntity.ok(new AuthResponseDTO(userDetails.getUsername(), jwt));
+        return null;
     }
 
     @Override
