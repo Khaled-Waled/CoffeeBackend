@@ -8,28 +8,19 @@
 	<artifactId>internship</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.2</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
 	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
 		<version.java>1.8</version.java>
-		<springBoot.version>2.5.6</springBoot.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<failOnMissingWebXml>false</failOnMissingWebXml>
 	</properties>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${springBoot.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
 
-
-		</dependencies>
-	</dependencyManagement>
 
 	<dependencies>
 
