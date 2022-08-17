@@ -1,6 +1,6 @@
 package com.test.CoffeeBackend.controller;
 
-import com.test.CoffeeBackend.dto.AuthRequestDTO;
+import com.test.CoffeeBackend.dto.UserDTO;
 import com.test.CoffeeBackend.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,32 +17,32 @@ public class UserController
     IUserService userService;
 
     @GetMapping("/all")
-    public List<AuthRequestDTO> getAllUsers()
+    public List<UserDTO> getAllUsers()
     {
         return userService.getAllUsers();
     }
     @GetMapping("/byToken/{token}")
     public ResponseEntity<?> getUserFromToken(@PathVariable String token)
     {
-        AuthRequestDTO authRequestDTO = userService.getUserFromToken(token);
-        if(authRequestDTO != null)
-            return ResponseEntity.ok().body(authRequestDTO);
+        UserDTO userDTO = userService.getUserFromToken(token);
+        if(userDTO != null)
+            return ResponseEntity.ok().body(userDTO);
         return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/byEmail/{email}")
     public ResponseEntity<?> getUserFromEmail(@PathVariable String email)
     {
-        AuthRequestDTO authRequestDTO = userService.getUserFromEmail(email);
-        if(authRequestDTO != null)
-            return ResponseEntity.ok().body(authRequestDTO);
+        UserDTO userDTO = userService.getUserFromEmail(email);
+        if(userDTO != null)
+            return ResponseEntity.ok().body(userDTO);
         return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/update/{email}")
-    public ResponseEntity<?> updateUser(@PathVariable String email,AuthRequestDTO authRequestDTO)
+    public ResponseEntity<?> updateUser(@PathVariable String email, UserDTO userDTO)
     {
-        return userService.updateUser(email,authRequestDTO);
+        return userService.updateUser(email, userDTO);
     }
 
     @DeleteMapping("/byEmail/{email}")

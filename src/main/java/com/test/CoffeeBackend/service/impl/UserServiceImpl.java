@@ -1,7 +1,7 @@
 package com.test.CoffeeBackend.service.impl;
 
 import com.test.CoffeeBackend.Security.JwtUtils;
-import com.test.CoffeeBackend.dto.AuthRequestDTO;
+import com.test.CoffeeBackend.dto.UserDTO;
 import com.test.CoffeeBackend.entity.AppUser;
 import com.test.CoffeeBackend.repository.UserRepository;
 import com.test.CoffeeBackend.service.IUserService;
@@ -24,45 +24,45 @@ public class UserServiceImpl implements IUserService
     ModelMapper modelMapper;
 
     @Override
-    public List<AuthRequestDTO> getAllUsers()
+    public List<UserDTO> getAllUsers()
     {
         List<AppUser> users = userRepository.findAll();
-        List<AuthRequestDTO> usersDTO = new ArrayList<>();
+        List<UserDTO> usersDTO = new ArrayList<>();
 
         users.forEach(user ->
-                usersDTO.add(modelMapper.map(user,AuthRequestDTO.class)));
+                usersDTO.add(modelMapper.map(user, UserDTO.class)));
         return usersDTO;
     }
 
     @Override
-    public AuthRequestDTO getUserFromToken(String token)
+    public UserDTO getUserFromToken(String token)
     {
         String email = jwtUtils.getUserNameFromJwtToken(token);
         return getUserFromEmail(email);
     }
 
     @Override
-    public AuthRequestDTO getUserFromEmail(String email)
+    public UserDTO getUserFromEmail(String email)
     {
         AppUser user = userRepository.findByEmail(email);
         if(user==null)
         {
             return null;
         }
-        return modelMapper.map(user,AuthRequestDTO.class);
+        return modelMapper.map(user, UserDTO.class);
     }
 
     @Override
-    public ResponseEntity<?> updateUser(String email,AuthRequestDTO authRequestDTO)
+    public ResponseEntity<?> updateUser(String email, UserDTO userDTO)
     {
         AppUser user = userRepository.findByEmail(email);
         if(user==null)
             return ResponseEntity.badRequest().build();
 
-        if(authRequestDTO.getFullName()!=null)
-            user.setFullName(authRequestDTO.getFullName());
-        if(authRequestDTO.getPassword()!=null)
-            user.setPassword(authRequestDTO.getPassword());
+        if(userDTO.getFullName()!=null)
+            user.setFullName(userDTO.getFullName());
+        if(userDTO.getPassword()!=null)
+            user.setPassword(userDTO.getPassword());
 
         userRepository.save(user);
         return ResponseEntity.ok().build();

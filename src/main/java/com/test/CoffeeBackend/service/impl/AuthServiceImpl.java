@@ -1,6 +1,6 @@
 package com.test.CoffeeBackend.service.impl;
 
-import com.test.CoffeeBackend.dto.AuthRequestDTO;
+import com.test.CoffeeBackend.dto.UserDTO;
 import com.test.CoffeeBackend.dto.CustomUser;
 import com.test.CoffeeBackend.entity.AppUser;
 import com.test.CoffeeBackend.repository.UserRepository;
@@ -27,7 +27,7 @@ public class AuthServiceImpl implements IAuthService, UserDetailsService
     @Autowired
     PasswordEncoder encoder;
     @Override
-    public ResponseEntity<?> createNewUser(AuthRequestDTO request)
+    public ResponseEntity<?> createNewUser(UserDTO request)
     {
         if (userRepository.existsByEmail(request.getEmail())) {
             return ResponseEntity.badRequest().body("Error: Email is already in use!");
@@ -41,7 +41,7 @@ public class AuthServiceImpl implements IAuthService, UserDetailsService
     }
 
     @Override
-    public ResponseEntity<?> login(AuthRequestDTO request)
+    public ResponseEntity<?> login(UserDTO request)
     {
         return null;
     }

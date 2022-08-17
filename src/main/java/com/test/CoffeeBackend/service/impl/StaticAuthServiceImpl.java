@@ -1,6 +1,6 @@
 package com.test.CoffeeBackend.service.impl;
 
-import com.test.CoffeeBackend.dto.AuthRequestDTO;
+import com.test.CoffeeBackend.dto.UserDTO;
 import com.test.CoffeeBackend.dto.AuthResponseDTO;
 import com.test.CoffeeBackend.entity.AppUser;
 import com.test.CoffeeBackend.repository.UserRepository;
@@ -17,7 +17,7 @@ public class StaticAuthServiceImpl implements IAuthService
     @Autowired
     UserRepository userRepository;
     @Override
-    public ResponseEntity<?> createNewUser(AuthRequestDTO request)
+    public ResponseEntity<?> createNewUser(UserDTO request)
     {
         try
         {
@@ -32,7 +32,7 @@ public class StaticAuthServiceImpl implements IAuthService
     }
 
     @Override
-    public ResponseEntity<?> login(AuthRequestDTO request)
+    public ResponseEntity<?> login(UserDTO request)
     {
         if(request.getEmail().equals("user@mail.com") &&
                 request.getPassword().equals("123"))

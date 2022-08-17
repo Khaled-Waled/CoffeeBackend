@@ -1,6 +1,6 @@
 package com.test.CoffeeBackend.dto;
 
-public class AuthRequestDTO
+public class UserDTO
 {
     private String fullName;
     private String password;

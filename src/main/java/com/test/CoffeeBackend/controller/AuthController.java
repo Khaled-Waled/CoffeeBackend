@@ -1,7 +1,7 @@
 package com.test.CoffeeBackend.controller;
 
 import com.test.CoffeeBackend.Security.JwtUtils;
-import com.test.CoffeeBackend.dto.AuthRequestDTO;
+import com.test.CoffeeBackend.dto.UserDTO;
 import com.test.CoffeeBackend.dto.AuthResponseDTO;
 import com.test.CoffeeBackend.dto.CustomUser;
 import com.test.CoffeeBackend.service.IAuthService;
@@ -12,8 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @author khaled-waled
@@ -39,7 +37,7 @@ public class AuthController
      * @return ResponseEntity: containing the state of execution
      */
     @PostMapping("/create")
-    public ResponseEntity<?> createNewUser(@RequestBody AuthRequestDTO request)
+    public ResponseEntity<?> createNewUser(@RequestBody UserDTO request)
     {
         return authService.createNewUser(request);
     }
@@ -50,7 +48,7 @@ public class AuthController
      * @return ResponseEntity: representing the state of the request and contains the JWT token if successful
      */
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthRequestDTO request)
+    public ResponseEntity<?> login(@RequestBody UserDTO request)
     {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
