@@ -2,14 +2,16 @@ package com.test.CoffeeBackend.dto;
 
 public class ProductDTO
 {
+    private Long id;
     private String image;
     private String name;
     private float price;
 
     private String description;
 
-    public ProductDTO(String image, String name, float price, String description)
+    public ProductDTO(Long id, String image, String name, float price, String description)
     {
+        this.id = id;
         this.image = image;
         this.name = name;
         this.price = price;
@@ -17,6 +19,16 @@ public class ProductDTO
     }
 
     public ProductDTO () {}
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
 
     public String getImage()
     {

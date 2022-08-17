@@ -70,7 +70,8 @@ public class ProductServiceImpl implements IProductService
         ArrayList<ProductDTO> productDTOS = new ArrayList<>();
 
         products.forEach(product ->
-                productDTOS.add(new ProductDTO(product.getImage(),product.getName(),product.getPrice(),product.getDescription())));
+                productDTOS.add(modelMapper.map(product,ProductDTO.class)));
+                //productDTOS.add(new ProductDTO(product.getId(), product.getImage(),product.getName(),product.getPrice(),product.getDescription())));
         return productDTOS;
     }
 }
