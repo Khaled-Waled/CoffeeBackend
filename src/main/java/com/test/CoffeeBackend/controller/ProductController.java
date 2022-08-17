@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/api/products")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class ProductController
 {
     @Autowired
