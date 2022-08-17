@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+/**
+ * @author khaled-waled
+ * A Rest controller that provides CRUD operation for the users
+ */
 @RestController
 @RequestMapping("/api/user")
 @CrossOrigin(origins = "*", maxAge = 3600)
