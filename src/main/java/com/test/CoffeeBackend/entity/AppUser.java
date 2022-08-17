@@ -3,8 +3,9 @@ package com.test.CoffeeBackend.entity;
 import javax.persistence.*;
 
 /**
- * @author khaled-waled
  * A JPA entity to store a user's data
+ *
+ * @author khaled-waled
  */
 @Entity
 @Table(name = "app_users")
@@ -28,7 +29,7 @@ public class AppUser
     }
 
     /**
-     * @param email User's email
+     * @param email    User's email
      * @param password User's password
      * @param fullName User's Full name
      */
@@ -41,6 +42,7 @@ public class AppUser
 
     /**
      * Get User's ID
+     *
      * @return ID
      */
     public Integer getId()
@@ -48,16 +50,31 @@ public class AppUser
         return id;
     }
 
+    /**
+     * Set User's ID
+     *
+     * @param id ID
+     */
     public void setId(Integer id)
     {
         this.id = id;
     }
 
+    /**
+     * Get User's Email
+     *
+     * @return User's Email
+     */
     public String getEmail()
     {
         return email;
     }
 
+    /**
+     * Sets User's Email
+     *
+     * @param email Email
+     */
     public void setEmail(String email)
     {
         this.email = email;

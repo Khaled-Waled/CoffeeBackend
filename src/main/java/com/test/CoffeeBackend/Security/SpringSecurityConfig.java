@@ -16,10 +16,16 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * This class manages and stores the configuration of the Spring-Security modules
+ *
+ * @author khaled-waled
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter
+{
 
     @Autowired
     private IAuthService userService;
@@ -35,23 +41,27 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {
+    public AuthTokenFilter authenticationJwtTokenFilter()
+    {
         return new AuthTokenFilter();
     }
 
     @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService((AuthServiceImpl)userService).passwordEncoder(bcryptPasswordEncoder);
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception
+    {
+        authenticationManagerBuilder.userDetailsService((AuthServiceImpl) userService).passwordEncoder(bcryptPasswordEncoder);
     }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
-            throws Exception {
+            throws Exception
+    {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception
+    {
         http.cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers(AUTH_WHITELIST).permitAll().anyRequest()

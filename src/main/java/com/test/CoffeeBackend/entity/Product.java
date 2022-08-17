@@ -2,6 +2,11 @@ package com.test.CoffeeBackend.entity;
 
 import javax.persistence.*;
 
+/**
+ * A JPA entity to store a user's data
+ *
+ * @author khaled-waled
+ */
 @Entity
 @Table(name = "products")
 public class Product
@@ -21,18 +26,32 @@ public class Product
 
     @Column(name = "description")
     private String description;
+
+    /**
+     * Default Constructor
+     */
     public Product()
     {
     }
 
+    /**
+     * Parametrised Constructor for the entity
+     * @param image Image URL
+     * @param name  Product's Name
+     * @param price Product's Price
+     * @param description   Product's Description
+     */
     public Product(String image, String name, float price, String description)
     {
         this.image = image;
         this.name = name;
         this.price = price;
-        this.description =description;
+        this.description = description;
     }
 
+    /**
+     * Setters and getters
+     */
     public Long getId()
     {
         return id;
