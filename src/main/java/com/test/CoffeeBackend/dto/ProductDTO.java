@@ -13,6 +13,7 @@ public class ProductDTO
         this.image = image;
         this.name = name;
         this.price = price;
+        this.description = description;
     }
 
     public ProductDTO () {}
