@@ -2,9 +2,7 @@ package com.test.CoffeeBackend.service.impl;
 
 import com.test.CoffeeBackend.Security.JwtUtils;
 import com.test.CoffeeBackend.dto.AuthRequestDTO;
-import com.test.CoffeeBackend.dto.AuthResponseDTO;
 import com.test.CoffeeBackend.entity.AppUser;
-import com.test.CoffeeBackend.entity.Product;
 import com.test.CoffeeBackend.repository.UserRepository;
 import com.test.CoffeeBackend.service.IUserService;
 import org.modelmapper.ModelMapper;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements IUserService
