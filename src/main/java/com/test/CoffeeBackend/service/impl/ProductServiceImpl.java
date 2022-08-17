@@ -52,6 +52,18 @@ public class ProductServiceImpl implements IProductService
     }
 
     @Override
+    public ResponseEntity<?> deleteProduct(Long id)
+    {
+        Optional<Product> product = productRepository.findById(id);
+        if(product.isPresent())
+        {
+            productRepository.delete(product.get());
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @Override
     public ArrayList<ProductDTO> getAll()
     {
         List<Product> products = productRepository.findAll();
