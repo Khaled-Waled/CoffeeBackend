@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +25,17 @@ public class UserServiceImpl implements IUserService
     UserRepository userRepository;
     @Autowired
     ModelMapper modelMapper;
+
+    @Override
+    public List<AuthRequestDTO> getAllUsers()
+    {
+        List<AppUser> users = userRepository.findAll();
+        List<AuthRequestDTO> usersDTO = new ArrayList<>();
+
+        users.forEach(user ->
+                usersDTO.add(modelMapper.map(user,AuthRequestDTO.class)));
+        return usersDTO;
+    }
 
     @Override
     public AuthRequestDTO getUserFromToken(String token)

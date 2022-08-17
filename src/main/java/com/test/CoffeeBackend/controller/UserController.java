@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/user")
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -14,6 +16,11 @@ public class UserController
     @Autowired
     IUserService userService;
 
+    @GetMapping("/all")
+    public List<AuthRequestDTO> getAllUsers()
+    {
+        return userService.getAllUsers();
+    }
     @GetMapping("/byToken/{token}")
     public ResponseEntity<?> getUserFromToken(@PathVariable String token)
     {
