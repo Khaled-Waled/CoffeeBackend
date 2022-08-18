@@ -8,6 +8,7 @@ import com.test.CoffeeBackend.service.IUserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ public class UserServiceImpl implements IUserService
     UserRepository userRepository;
     @Autowired
     ModelMapper modelMapper;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserDTO> getAllUsers()
@@ -62,7 +66,7 @@ public class UserServiceImpl implements IUserService
         if(userDTO.getFullName()!=null)
             user.setFullName(userDTO.getFullName());
         if(userDTO.getPassword()!=null)
-            user.setPassword(userDTO.getPassword());
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
         userRepository.save(user);
         return ResponseEntity.ok().build();
